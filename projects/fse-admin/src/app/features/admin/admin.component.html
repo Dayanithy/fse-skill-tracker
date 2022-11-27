@@ -1,0 +1,81 @@
+<div class="container" style="margin: 50px;">
+    <div class="row">
+        <div class="col-12">
+            <h2>Search Profiles</h2>
+            <div class="container">
+                <div class="row">
+                    <div class="col-6">
+                        <section>
+                            <h4>Search by</h4>
+                            <mat-button-toggle-group aria-label="Font Style" value="name" #searchToggle="matButtonToggleGroup">
+                                <mat-button-toggle class="my-custom-darker-style" value="name">Name</mat-button-toggle>
+                                <mat-button-toggle class="my-custom-darker-style" value="id">Associate Id
+                                </mat-button-toggle>
+                                <mat-button-toggle class="my-custom-darker-style" value="skill">Skill
+                                </mat-button-toggle>
+                            </mat-button-toggle-group>
+                        </section>
+                    </div>
+                </div>
+                <div class="row" style="margin-top: 20px;">
+                    <div class="col-6">
+                        <mat-form-field class="example-full-width" appearance="fill">
+                            <mat-label>Search by {{ searchToggle.value }}</mat-label>
+                            <input #searchBox matInput (input)="search(searchBox.value)">
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid">
+                <div class="row" style="margin-top: 20px;" *ngFor="let profile of profiles$ | async">
+                    <div class="col-4">
+                        <table>
+                            <tr>
+                                <td class="bg-color-gray">Name</td>
+                                <td>{{profile.Name}}</td>
+                            </tr>
+                            <tr>
+                                <td class="bg-color-gray">Associate ID</td>
+                                <td>{{profile.AssociateId}}</td>
+                            </tr>
+                            <tr>
+                                <td class="bg-color-gray">Email</td>
+                                <td><a href="{{profile.Email}}">{{profile.Email}}</a></td>
+                            </tr>
+                            <tr>
+                                <td class="bg-color-gray">Mobile</td>
+                                <td>{{profile.Mobile}}</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="col-3">
+                        <ul class="list-group">
+                            <ng-container *ngFor="let techSkill of profile.Skills">
+                                <li *ngIf="techSkill.IsTechnical === true"
+                                    class="list-group-item d-flex justify-content-between align-items-center">
+                                    {{
+                                    techSkill.SkillName }}
+                                    <span class="badge bg-primary rounded-pill">{{
+                                        techSkill.Proficiency}}</span>
+                                </li>
+                            </ng-container>
+                        </ul>
+                    </div>
+                    <div class="col-3">
+                        <ul class="list-group">
+                            <ng-container *ngFor="let techSkill of profile.Skills">
+                                <li *ngIf="techSkill.IsTechnical === false"
+                                    class="list-group-item d-flex justify-content-between align-items-center">
+                                    {{
+                                    techSkill.SkillName }}
+                                    <span class="badge bg-primary rounded-pill">{{
+                                        techSkill.Proficiency}}</span>
+                                </li>
+                            </ng-container>
+                        </ul>
+                    </div>
+                    <hr class="m-top-10"/>
+                </div>
+            </div>
+        </div>
+    </div>

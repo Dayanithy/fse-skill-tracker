@@ -1,0 +1,18 @@
+.spacer {
+    flex: 1 0 auto;
+}
+
+button {
+    margin: 0 10px;
+
+    &.active {
+        filter: brightness(120%);
+    }
+}
+
+footer {
+    text-align: center;
+}
+.m-right-5 {
+    margin-right: 5px;
+}
